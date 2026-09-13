@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahir Patel</title>
+<meta name="description" content="Mahir Patel — ECE @ Illinois '29. AI agents and the hardware they run on. Co-founder of Ringlatch, builder of NOVA, LLM-serving researcher.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --flood:#1B12C8; --flood-deep:#120BA4; --ink:#0B0B10; --ink2:#101018;
+    --white:#FFFFFF; --dim:rgba(255,255,255,.64); --faint:rgba(255,255,255,.38);
+    --hair:rgba(255,255,255,.16); --mint:#4EF0B0;
+    --disp:"Anton",Impact,sans-serif;
+    --sans:"Archivo",system-ui,-apple-system,sans-serif;
+    --mono:"Geist Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--flood); color:var(--white); font:16px/1.65 var(--sans); overflow-x:hidden}
+  ::selection{background:var(--white); color:var(--flood)}
+  a{color:var(--white); text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--white); outline-offset:3px}
+  img{max-width:100%}
+  .pad{padding-inline:clamp(18px,4vw,54px)}
+  .gut{max-width:1280px; margin:0 auto}
+
+  body::after{content:""; position:fixed; inset:-50%; pointer-events:none; z-index:6; opacity:.055; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 8s steps(10) infinite}
+  @keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,3%)}80%{transform:translate(3%,-1%)}}
+
+  .chrome{position:fixed; inset:0; pointer-events:none; z-index:20; font-family:var(--mono); font-size:12px; letter-spacing:.08em}
+  .chrome > *{position:fixed; pointer-events:auto}
+  .c-name{top:20px; left:clamp(18px,4vw,54px); font-weight:500}
+  .c-links{top:20px; right:clamp(18px,4vw,54px); display:flex; gap:18px}
+  .c-links a{color:var(--dim)} .c-links a:hover{color:var(--white)}
+  .c-status{bottom:18px; left:clamp(18px,4vw,54px); color:var(--faint); display:flex; align-items:center; gap:8px}
+  .c-status .d{width:7px; height:7px; border-radius:50%; background:var(--mint); animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(78,240,176,.4)}60%{box-shadow:0 0 0 7px rgba(78,240,176,0)}}
+  @media (max-width:700px){ .c-status{display:none} .c-links{gap:12px} }
+
+  /* ============ MONOLITH HERO ============ */
+  #stage{position:relative; height:380vh}
+  html:not(.js) #stage{height:auto}
+  .sticky{position:sticky; top:0; height:100vh; overflow:hidden}
+  #gl{position:absolute; inset:0; width:100%; height:100%}
+  .hero-title{position:absolute; left:clamp(18px,4vw,54px); bottom:clamp(64px,10vh,110px); z-index:5; pointer-events:none}
+  .hero-title .idx{font-family:var(--mono); font-size:13px; color:var(--dim); letter-spacing:.14em; display:block; margin-bottom:6px}
+  .hero-title h2{font-family:var(--disp); font-weight:400; font-size:clamp(44px,9vw,118px); line-height:.95; margin:0; text-transform:uppercase; letter-spacing:.01em}
+  .hero-title .sub{font-family:var(--mono); font-size:clamp(12px,1.3vw,14px); color:var(--dim); margin-top:12px; max-width:52ch}
+  .hero-meta{position:absolute; right:clamp(18px,4vw,54px); bottom:clamp(64px,10vh,110px); z-index:5; text-align:right; font-family:var(--mono); font-size:12.5px; color:var(--dim); pointer-events:none}
+  .htxt{opacity:0; transform:translateY(18px); transition:opacity .45s ease, transform .45s ease}
+  .htxt.on{opacity:1; transform:none}
+  .hero-hint{position:absolute; left:50%; transform:translateX(-50%); bottom:20px; z-index:5; font-family:var(--mono); font-size:11px; letter-spacing:.22em; color:var(--faint); text-transform:uppercase}
+  .hero-open{position:absolute; top:16vh; left:0; right:0; z-index:5; text-align:center; pointer-events:none; padding-inline:18px}
+  .hero-open .k{font-family:var(--mono); font-size:12.5px; letter-spacing:.2em; color:var(--dim); text-transform:uppercase}
+  .hero-open h1{font-family:var(--disp); font-weight:400; text-transform:uppercase; font-size:clamp(38px,7.4vw,96px); line-height:.96; margin:8px 0 0; letter-spacing:.012em}
+  .prog{position:absolute; right:clamp(18px,4vw,54px); top:50%; transform:translateY(-50%); z-index:5; display:flex; flex-direction:column; gap:10px}
+  .prog i{width:7px; height:7px; border-radius:50%; border:1.5px solid var(--faint); transition:background .25s,border-color .25s}
+  .prog i.on{background:var(--white); border-color:var(--white)}
+  html:not(.js) .sticky{position:relative; height:auto; min-height:70vh}
+  html:not(.js) .hero-title,html:not(.js) .hero-open{position:relative; inset:auto; margin:40px 0}
+
+  /* ============ shared section bits ============ */
+  html.js .rv{opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1)}
+  html.js .rv.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important; transition:none!important}
+    html.js .rv{opacity:1; transform:none}
+    html{scroll-behavior:auto}
+    body::after{display:none}
+  }
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin:0 0 10px}
+  .eyebrow b{color:var(--white); font-weight:500}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{font-family:var(--mono); font-size:11px; color:var(--dim); border:1px solid var(--hair); padding:4px 11px}
+  .btn{display:inline-block; font-family:var(--mono); font-size:13px; font-weight:500; padding:12px 20px; border:1px solid var(--hair); color:var(--white); background:transparent; transition:background .18s,color .18s,border-color .18s}
+  .btn:hover{background:var(--white); color:var(--flood); border-color:var(--white)}
+  .btn.primary{background:var(--white); color:var(--flood); border-color:var(--white)}
+  .btn.primary:hover{background:transparent; color:var(--white)}
+
+  /* ============ intro ============ */
+  #about{position:relative; z-index:3; padding-block:clamp(80px,12vh,130px) 0}
+  .intro{display:grid; grid-template-columns:1fr 120px; gap:30px; align-items:start; border-top:1px solid var(--hair); padding-top:36px}
+  .intro .lede{font-family:var(--sans); font-weight:500; font-size:clamp(20px,2.6vw,30px); line-height:1.35; color:var(--white); margin:0 0 16px; max-width:30ch; letter-spacing:-.01em}
+  .intro p{margin:0 0 12px; max-width:62ch; color:var(--dim)}
+  .intro b{color:var(--white); font-weight:600}
+  .portrait{width:120px; height:120px; border-radius:10px; object-fit:cover; border:1px solid var(--hair); justify-self:end; filter:saturate(.9)}
+  .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); border-block:1px solid var(--hair); margin-top:44px}
+  .stat{padding:20px 18px 20px 0}
+  .stat + .stat{border-left:1px solid var(--hair); padding-left:22px}
+  .stat .n{font-family:var(--disp); font-weight:400; font-size:clamp(26px,3.4vw,40px)}
+  .stat .l{font-family:var(--mono); font-size:11.5px; color:var(--dim); margin-top:4px; line-height:1.5}
+
+  /* ============ chapters ============ */
+  .ch{position:relative; z-index:3; padding-block:clamp(90px,14vh,160px) 0}
+  .ch-head{display:flex; align-items:baseline; justify-content:space-between; gap:18px; flex-wrap:wrap; margin-bottom:26px}
+  .ch-no{font-family:var(--mono); font-size:12.5px; letter-spacing:.2em; color:var(--faint)}
+  .ch-no b{color:var(--white); font-weight:500}
+  .ch h3{font-family:var(--disp); font-weight:400; text-transform:uppercase; font-size:clamp(52px,9.5vw,132px); line-height:.92; margin:0 0 26px; letter-spacing:.01em}
+  .ch h3 .flag{display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--mint); border:1px solid rgba(78,240,176,.5); padding:4px 10px; vertical-align:clamp(14px,2.4vw,34px); margin-left:16px}
+  .ch-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3.5vw,46px); align-items:stretch}
+  .ch-grid.flip .ch-copy{order:2}
+  .ch-copy p{margin:0 0 14px; color:var(--dim); max-width:56ch; font-size:15.5px}
+  .ch-copy p b{color:var(--white); font-weight:600}
+  .ch-copy .chips{margin:18px 0 22px}
+  .viz{position:relative; background:var(--ink); border:1px solid rgba(255,255,255,.09); min-height:360px; overflow:hidden}
+  .viz canvas{position:absolute; inset:0; width:100%; height:100%; display:block}
+  .viz .vlabel{position:absolute; left:14px; top:12px; font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; color:var(--faint); text-transform:uppercase; z-index:2}
+  .viz .vcap{position:absolute; right:14px; bottom:10px; font-family:var(--mono); font-size:10.5px; color:var(--faint); z-index:2}
+  .num-line{font-family:var(--disp); font-weight:400; font-size:clamp(26px,3.6vw,42px); letter-spacing:.02em; line-height:1; margin:4px 0 6px}
+  .num-line a:hover{color:var(--mint)}
+  .sub-mono{font-family:var(--mono); font-size:12px; color:var(--dim)}
+  .sub-mono a{text-decoration:underline}
+
+  /* ============ more work ============ */
+  #more{position:relative; z-index:3; padding-block:clamp(90px,13vh,150px) 0}
+  .more-row{border-top:1px solid var(--hair)}
+  .mrow{display:grid; grid-template-columns:auto 1fr auto; gap:clamp(14px,3vw,34px); align-items:center; padding:22px 6px; border-bottom:1px solid var(--hair); position:relative; overflow:hidden; color:var(--white)}
+  .mrow .fill{position:absolute; inset:0; background:var(--ink); transform:translateY(101%); transition:transform .3s cubic-bezier(.7,0,.3,1)}
+  .mrow:hover .fill{transform:translateY(0)}
+  .mrow > *:not(.fill){position:relative}
+  .mrow .idx{font-family:var(--mono); font-size:12.5px; color:var(--faint); width:30px}
+  .mrow h4{font-family:var(--disp); font-weight:400; text-transform:uppercase; font-size:clamp(24px,4vw,44px); line-height:1; margin:0}
+  .mrow p{margin:4px 0 0; font-size:13.5px; color:var(--dim); max-width:58ch}
+  .mrow .meta{font-family:var(--mono); font-size:11.5px; color:var(--dim); white-space:nowrap}
+
+  /* ============ activities ============ */
+  #activities{position:relative; z-index:3; padding-block:clamp(90px,13vh,150px) 0}
+  .act-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .acard{border:1px solid var(--hair); padding:22px 24px; position:relative; transition:background .2s, border-color .2s}
+  .acard:hover{background:rgba(11,11,16,.55); border-color:rgba(255,255,255,.28)}
+  .acard .when{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--faint)}
+  .acard h4{font-family:var(--sans); font-weight:600; font-size:16.5px; margin:10px 0 6px}
+  .acard p{margin:0; font-size:13.5px; color:var(--dim); max-width:60ch}
+  .acard.spread{grid-column:1/-1}
+
+  /* ============ now ============ */
+  #now{position:relative; z-index:3; padding-block:clamp(80px,11vh,130px) 0}
+  .now{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  .ncard{border:1px solid var(--hair); padding:20px 22px}
+  .ncard .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mint)}
+  .ncard h4{font-family:var(--sans); font-weight:600; font-size:16px; margin:8px 0 6px}
+  .ncard p{margin:0; font-size:13.5px; color:var(--dim)}
+
+  /* ============ footer ============ */
+  footer{position:relative; z-index:3; padding-block:clamp(90px,15vh,170px) 60px}
+  footer .big{font-family:var(--disp); font-weight:400; text-transform:uppercase; font-size:clamp(52px,11vw,150px); line-height:.92; margin:0 0 24px; letter-spacing:.01em}
+  footer .big a:hover{color:var(--mint)}
+  footer p.sub{color:var(--dim); max-width:60ch; margin:0}
+  footer .meta{display:flex; gap:22px; flex-wrap:wrap; font-family:var(--mono); font-size:12.5px; color:var(--dim); margin-top:30px}
+  footer .meta a:hover{color:var(--white)}
+  footer .hint{font-family:var(--mono); font-size:11.5px; color:var(--faint); margin-top:30px}
+  footer .hint b{color:var(--mint); font-weight:500}
+
+  /* ============ terminal ============ */
+  #termBtn{position:fixed; right:20px; bottom:18px; z-index:40; font-family:var(--mono); font-size:13px; font-weight:500; background:var(--ink); color:var(--white); border:1px solid rgba(255,255,255,.2); padding:10px 14px; cursor:pointer; transition:background .15s,color .15s}
+  #termBtn:hover{background:var(--white); color:var(--flood)}
+  #term{position:fixed; z-index:50; right:20px; bottom:18px; width:min(560px,calc(100vw - 40px)); height:min(420px,70vh); background:#07070BF5; border:1px solid rgba(255,255,255,.18); box-shadow:0 24px 70px rgba(0,0,0,.55); display:none; flex-direction:column; overflow:hidden}
+  #term.open{display:flex}
+  #term header{display:flex; align-items:center; gap:8px; padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.1); font-family:var(--mono); font-size:11.5px; color:var(--faint); letter-spacing:.08em}
+  #term header .dots{display:flex; gap:6px}
+  #term header .dots i{width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.15)}
+  #term header .dots i:first-child{background:var(--flood)}
+  #term header button{margin-left:auto; background:none; border:0; color:var(--faint); font-family:var(--mono); font-size:14px; cursor:pointer}
+  #term header button:hover{color:var(--white)}
+  #tout{flex:1; overflow-y:auto; padding:14px 16px; font-family:var(--mono); font-size:13px; line-height:1.75; color:#E8EAF6; white-space:pre-wrap; overflow-wrap:anywhere}
+  #tout .c-b{color:#8A93FF} #tout .c-g{color:var(--mint)} #tout .c-d{color:rgba(255,255,255,.4)}
+  #tout a{color:#8A93FF; text-decoration:underline}
+  #tline{display:flex; gap:8px; padding:10px 16px 14px; font-family:var(--mono); font-size:13px; border-top:1px solid rgba(255,255,255,.1)}
+  #tline .ps{color:#8A93FF}
+  #tin{flex:1; background:none; border:0; outline:none; color:#E8EAF6; font:inherit; caret-color:#8A93FF}
+
+  @media (max-width:860px){
+    #stage{height:340vh}
+    .intro{grid-template-columns:1fr}
+    .portrait{justify-self:start; order:-1}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat + .stat{border-left:0; padding-left:0}
+    .stat:nth-child(even){border-left:1px solid var(--hair); padding-left:16px}
+    .stat:nth-child(n+3){border-top:1px solid var(--hair)}
+    .ch-grid{grid-template-columns:1fr}
+    .ch-grid.flip .ch-copy{order:0}
+    .viz{min-height:280px}
+    .mrow{grid-template-columns:1fr; gap:6px}
+    .mrow .idx{display:none}
+    .act-grid{grid-template-columns:1fr}
+    .now{grid-template-columns:1fr}
+    .prog{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="chrome">
+  <span class="c-name">MAHIR PATEL</span>
+  <span class="c-links">
+    <a href="#ch-ringlatch">WORK</a>
+    <a href="#ch-magnet">RESEARCH</a>
+    <a href="#contact">CONTACT</a>
+    <a href="Mahir_Patel_Resume.pdf">RESUME</a>
+  </span>
+  <span class="c-status"><span class="d"></span>OPEN TO SUMMER 2027 INTERNSHIPS</span>
+</div>
+
+<!-- ============ MONOLITH HERO ============ -->
+<div id="stage">
+  <div class="sticky">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="hero-open" id="heroOpen">
+      <span class="k">ECE @ Illinois '29 — Champaign, IL</span>
+      <h1>AI agents &amp;<br>the hardware<br>they run on</h1>
+    </div>
+    <div class="hero-title">
+      <span class="idx htxt" id="fIdx"></span>
+      <h2 class="htxt" id="fTitle"></h2>
+      <div class="sub htxt" id="fSub"></div>
+    </div>
+    <div class="hero-meta htxt" id="fMeta"></div>
+    <div class="prog" id="prog" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="hero-hint" id="heroHint">SCROLL</div>
+  </div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<section id="about" class="pad"><div class="gut">
+  <div class="intro rv">
+    <div>
+      <p class="lede">I ship AI that answers real phone calls — and I can lay out the board it runs on.</p>
+      <p><b>Mahir Patel</b> — electrical engineering at the University of Illinois Urbana-Champaign ('29, CS + Math minors). Co-founder of <b>Ringlatch</b>, builder of <b>NOVA</b>, undergraduate researcher on <b>LLM serving systems</b>. It started with programming JARVIS into ASME's Iron Man helmet as a freshman; it hasn't slowed down since.</p>
+      <div class="cta">
+        <a class="btn primary" href="Mahir_Patel_Resume.pdf">VIEW RESUME</a>
+        <a class="btn" href="https://github.com/mahirpatel1560">GITHUB</a>
+        <a class="btn" href="https://linkedin.com/in/mahirpatel1">LINKEDIN</a>
+        <a class="btn" href="mailto:mpate452@illinois.edu">EMAIL</a>
+      </div>
+    </div>
+    <img class="portrait" src="headshot.jpg" alt="Portrait of Mahir Patel" width="560" height="560">
+  </div>
+  <div class="stats rv" id="counters">
+    <div class="stat"><div class="n"><span data-count="100">100</span>+</div><div class="l">STUDENTS ON NOVA</div></div>
+    <div class="stat"><div class="n"><span data-count="60">60</span> FPS</div><div class="l">FINE-TUNED QWEN3-VL (24–60)</div></div>
+    <div class="stat"><div class="n"><span data-count="3">3</span> REVS</div><div class="l">CUSTOM PCB, FAB &amp; BRING-UP</div></div>
+    <div class="stat"><div class="n"><span data-count="70">70</span>+</div><div class="l">PRINTED PARTS, IRON MAN HELMET</div></div>
+  </div>
+</div></section>
+
+<!-- ============ CH 01 RINGLATCH ============ -->
+<section class="ch pad" id="ch-ringlatch"><div class="gut">
+  <div class="ch-head rv"><span class="ch-no"><b>01</b> / 04 — LIVE PRODUCT</span><span class="ch-no">2026 — · CO-FOUNDER</span></div>
+  <h3 class="rv">Ringlatch<span class="flag">LIVE</span></h3>
+  <div class="ch-grid rv">
+    <div class="ch-copy">
+      <p>An AI phone receptionist for local businesses — answers after-hours calls, books owner-confirmed appointments, speaks English and Spanish, and emails the owner a summary of every call.</p>
+      <p><b>I built the entire stack solo:</b> voice agents, Cloudflare Workers backend, Supabase/Postgres, Stripe billing, and per-client auto-provisioning from a 7-question intake — a new client can go live the same day.</p>
+      <div class="chips"><span class="chip">VOICE AI</span><span class="chip">CLOUDFLARE WORKERS</span><span class="chip">SUPABASE</span><span class="chip">STRIPE</span></div>
+      <div class="num-line"><a href="tel:+17087196505">(708) 719-6505</a></div>
+      <div class="sub-mono">the demo line is live 24/7 — talk to it like a customer · <a href="https://www.ringlatch.workers.dev">visit the site</a></div>
+    </div>
+    <div class="viz"><span class="vlabel">LIVE CALL — AGENT ↔ CALLER</span><canvas id="vizWave"></canvas><span class="vcap">audio rendered generatively</span></div>
+  </div>
+</div></section>
+
+<!-- ============ CH 02 MAGNET ============ -->
+<section class="ch pad" id="ch-magnet"><div class="gut">
+  <div class="ch-head rv"><span class="ch-no"><b>02</b> / 04 — RESEARCH · URSA</span><span class="ch-no">AUG 2025 – JAN 2026</span></div>
+  <h3 class="rv">Magnet</h3>
+  <div class="ch-grid flip rv">
+    <div class="ch-copy">
+      <p>Serving systems execute each LLM call independently — downstream agents wait for complete inputs, serializing the whole pipeline. Magnet treats a multi-agent workflow as a <b>dataflow graph</b>, overlapping downstream context prefill with upstream generation through just-in-time and parallel prefilling.</p>
+      <p><b>My work:</b> instrumented multi-agent workloads, collected execution traces — token rates, prefill times, KV-cache memory, dependency structure — and built a <b>trace-driven simulator</b> for just-in-time prefill scheduling, evaluated on latency, throughput, and GPU utilization against sequential baselines.</p>
+      <div class="chips"><span class="chip">LLM SERVING</span><span class="chip">SCHEDULING</span><span class="chip">PYTHON</span><span class="chip">TRACE-DRIVEN SIM</span></div>
+    </div>
+    <div class="viz"><span class="vlabel">DATAFLOW — JIT PREFILL OVERLAP</span><canvas id="vizDag"></canvas><span class="vcap">watch downstream start before upstream finishes</span></div>
+  </div>
+</div></section>
+
+<!-- ============ CH 03 NOVA ============ -->
+<section class="ch pad" id="ch-nova"><div class="gut">
+  <div class="ch-head rv"><span class="ch-no"><b>03</b> / 04 — 100+ USERS</span><span class="ch-no">2026 — · FOUNDER</span></div>
+  <h3 class="rv">Nova</h3>
+  <div class="ch-grid rv">
+    <div class="ch-copy">
+      <p>A multi-agent study companion with <b>persistent memory, planning, and tool execution</b> — not a single chatbot call. Live on Discord, used by 100+ students, shipped weekly against real feedback.</p>
+      <p>NOVA grew out of the JARVIS system I programmed for the Iron Man helmet — the same thesis, scaled from one servo faceplate to a campus.</p>
+      <div class="chips"><span class="chip">MULTI-AGENT</span><span class="chip">RETRIEVAL</span><span class="chip">MEMORY</span><span class="chip">DISCORD</span></div>
+      <div class="num-line"><a href="https://novabrain.dev">NOVABRAIN.DEV</a></div>
+      <div class="sub-mono">try it yourself — onboarding takes a minute</div>
+    </div>
+    <div class="viz"><span class="vlabel">AGENT NETWORK — PLANNING · MEMORY · TOOLS</span><canvas id="vizNova"></canvas><span class="vcap">nodes fire as agents think</span></div>
+  </div>
+</div></section>
+
+<!-- ============ CH 04 COPPER ============ -->
+<section class="ch pad" id="ch-copper"><div class="gut">
+  <div class="ch-head rv"><span class="ch-no"><b>04</b> / 04 — HARDWARE</span><span class="ch-no">2025 – 2026 · KICAD · RTL</span></div>
+  <h3 class="rv">Copper</h3>
+  <div class="ch-grid flip rv">
+    <div class="ch-copy">
+      <p><b>Custom PCB data logger</b> — designed, routed, and hand-assembled: 512 KB EEPROM + RTC over I2C, signal integrity validated across 3 board revisions with an oscilloscope and logic analyzer.</p>
+      <p><b>32-bit ALU in SystemVerilog</b> — verified in Vivado with a self-checking testbench, directed and randomized vectors across every operation and flag.</p>
+      <p><b>The Iron Man helmet</b> — led the electrical subsystem across a 6-person ASME team and programmed its JARVIS voice AI on a Raspberry Pi 5.</p>
+      <div class="chips"><span class="chip">KICAD</span><span class="chip">I2C/SPI</span><span class="chip">SYSTEMVERILOG</span><span class="chip">VIVADO</span><span class="chip">RASPBERRY PI</span></div>
+    </div>
+    <div class="viz"><span class="vlabel">PCB — PROCEDURAL, NO MODEL FILES</span><canvas id="vizBoard"></canvas><span class="vcap">drag to rotate</span></div>
+  </div>
+</div></section>
+
+<!-- ============ MORE WORK ============ -->
+<section id="more" class="pad"><div class="gut">
+  <p class="eyebrow rv">ARCHIVE — <b>MORE WORK</b></p>
+  <div class="more-row rv">
+    <div class="mrow"><span class="fill"></span><span class="idx">05</span><span><h4>Qwen3-VL Grader</h4><p>Fine-tuned VLM grading driver performance frame-by-frame at 24–60 fps; REST + vector-DB backend serving a mobile app.</p></span><span class="meta">2026 · ML</span></div>
+    <div class="mrow"><span class="fill"></span><span class="idx">06</span><span><h4>GestureLab</h4><p>Dual-board embedded system fusing 10 sensors into a React/Three.js dashboard with gesture control — built in a 24-hour hackathon.</p></span><span class="meta">2026 · EMBEDDED</span></div>
+    <div class="mrow"><span class="fill"></span><span class="idx">07</span><span><h4>Thesis</h4><p>Stock-research copilot plus a Discord trading league where the rules are enforced in code.</p></span><span class="meta">2026 · FINTECH</span></div>
+    <div class="mrow"><span class="fill"></span><span class="idx">08</span><span><h4>DueDash</h4><p>Chrome extension pulling Canvas LMS deadlines into one auto-updating dashboard.</p></span><span class="meta">2026 · TOOLS</span></div>
+  </div>
+</div></section>
+
+<!-- ============ ACTIVITIES ============ -->
+<section id="activities" class="pad"><div class="gut">
+  <p class="eyebrow rv">CAMPUS — <b>LEADERSHIP &amp; INVOLVEMENT</b></p>
+  <div class="act-grid rv">
+    <div class="acard"><span class="when">AUG 2025 —</span><h4>Technical Vice President, SIGAIDA — ACM @ UIUC</h4><p>Executive board. Lead technical programming for the AI &amp; data special interest group — workshops, member projects, speaker sessions.</p></div>
+    <div class="acard"><span class="when">AUG 2025 —</span><h4>Technical Coordinator — IEEE UIUC Student Branch</h4><p>Run KiCad, embedded, and soldering workshops; mentor members from schematic through firmware bring-up.</p></div>
+    <div class="acard"><span class="when">OCT 2025 – APR 2026</span><h4>Electrical Team Lead — ASME at Illinois</h4><p>Led the electrical subsystem of the Iron Man animatronic helmet across a 6-person team.</p></div>
+    <div class="acard"><span class="when">AUG 2025 – JAN 2026</span><h4>Undergraduate Researcher — URSA</h4><p>LLM serving systems (Magnet) — workload traces, scheduling simulation, evaluation.</p></div>
+    <div class="acard spread"><span class="when">2025 — NOW</span><h4>Hackathons &amp; certifications</h4><p>24-hour hardware hackathon (GestureLab) · NVIDIA Deep Learning Institute · FCC Amateur Radio License · Dean's List.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ NOW ============ -->
+<section id="now" class="pad"><div class="gut">
+  <p class="eyebrow rv">STATUS — <b>CURRENTLY</b></p>
+  <div class="now rv">
+    <div class="ncard"><span class="k">SHIPPING</span><h4>Ringlatch → first clients</h4><p>Pitching Chicagoland shops — intake-to-live provisioning in a day, owner-confirmed booking.</p></div>
+    <div class="ncard"><span class="k">LEARNING</span><h4>Computer systems, properly</h4><p>ECE 120 onward, LLM-serving papers on the side — Magnet made me want the whole stack.</p></div>
+    <div class="ncard"><span class="k">TEACHING</span><h4>Fall workshops</h4><p>AI/data sessions for SIGAIDA, KiCad/embedded labs for IEEE.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ CONTACT ============ -->
+<footer id="contact" class="pad"><div class="gut">
+  <p class="eyebrow">CONTACT — <b>SUMMER 2027</b></p>
+  <p class="big"><a href="mailto:mpate452@illinois.edu">LET'S<br>TALK</a></p>
+  <p class="sub">Open to Summer 2027 internships — software, ML, embedded, silicon. Champaign or Chicago in person, anywhere remote. <a style="text-decoration:underline" href="mailto:mpate452@illinois.edu">mpate452@illinois.edu</a></p>
+  <div class="meta">
+    <a href="Mahir_Patel_Resume.pdf">RESUME.PDF</a>
+    <a href="https://github.com/mahirpatel1560">GITHUB</a>
+    <a href="https://linkedin.com/in/mahirpatel1">LINKEDIN</a>
+    <a href="https://novabrain.dev">NOVA</a>
+    <a href="https://www.ringlatch.workers.dev">RINGLATCH</a>
+    <span>© 2026 MAHIR PATEL</span>
+  </div>
+  <p class="hint">FOR THE CURIOUS: PRESS <b>`</b> — THERE'S A TERMINAL IN HERE.</p>
+</div></footer>
+
+<button id="termBtn" aria-label="Open terminal">&gt;_</button>
+<div id="term" role="dialog" aria-label="Terminal">
+  <header><span class="dots"><i></i><i></i><i></i></span><span>mahir@site:~</span><button id="termX" aria-label="Close terminal">✕</button></header>
+  <div id="tout"></div>
+  <div id="tline"><span class="ps">mahir@site:~$</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Terminal input"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
