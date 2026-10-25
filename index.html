@@ -176,6 +176,7 @@
   #tline .ps{color:#8A93FF}
   #tin{flex:1; background:none; border:0; outline:none; color:#E8EAF6; font:inherit; caret-color:#8A93FF}
 
+  @media (max-width:560px){ .hero-meta{display:none} } /* dates repeat in each chapter head; on phones the meta collided with the face subtitle */
   @media (max-width:860px){
     #stage{height:340vh}
     .intro{grid-template-columns:1fr}
@@ -232,7 +233,7 @@
   <div class="intro rv">
     <div>
       <p class="lede">I design circuit boards clients pay for, and I build the AI software that runs on top.</p>
-      <p><b>Mahir Patel</b>, electrical engineering at the University of Illinois Urbana-Champaign ('29, CS + Math minors). Freelance <b>PCB and embedded designer</b> on Upwork, builder of <b>NOVA</b>, former undergraduate researcher on <b>LLM serving systems</b>. It started with programming JARVIS into ASME's Iron Man helmet as a freshman; it hasn't slowed down since.</p>
+      <p><b>Mahir Patel</b>, electrical engineering at the University of Illinois Urbana-Champaign ('29, CS + Math minors). Freelance <b>PCB and embedded designer</b> on Upwork, builder of <b>NOVA</b>, former undergraduate researcher on <b>LLM serving systems</b>. It started with programming JARVIS into ASME's Iron Man helmet as a freshman.</p>
       <div class="cta">
         <a class="btn primary" href="Mahir_Patel_Resume.pdf">VIEW RESUME</a>
         <a class="btn" href="https://github.com/mahirpatel1560">GITHUB</a>
@@ -287,13 +288,12 @@
   <h3 class="rv">Nova</h3>
   <div class="ch-grid rv">
     <div class="ch-copy">
-      <p>A multi-agent study companion with <b>persistent memory, planning, and tool execution</b>, not a single chatbot call. Live on Discord, used by 100+ students, shipped weekly against real feedback.</p>
-      <p>NOVA grew out of the JARVIS system I programmed for the Iron Man helmet: the same thesis, scaled from one servo faceplate to a campus.</p>
-      <div class="chips"><span class="chip">MULTI-AGENT</span><span class="chip">RETRIEVAL</span><span class="chip">MEMORY</span><span class="chip">DISCORD</span></div>
+      <p>A <b>retrieval-augmented assistant</b> that answers UIUC course and campus questions. Live on Discord, used by 100+ UIUC students, and improved from their feedback.</p>
+      <div class="chips"><span class="chip">RETRIEVAL</span><span class="chip">LLM APIS</span><span class="chip">PYTHON</span><span class="chip">DISCORD</span></div>
       <div class="num-line"><a href="https://novabrain.dev">NOVABRAIN.DEV</a></div>
       <div class="sub-mono">try it yourself: onboarding takes a minute</div>
     </div>
-    <div class="viz"><span class="vlabel">AGENT NETWORK · PLANNING · MEMORY · TOOLS</span><canvas id="vizNova"></canvas><span class="vcap">nodes fire as agents think</span></div>
+    <div class="viz"><span class="vlabel">QUESTION · RETRIEVAL · SOURCES · ANSWER</span><canvas id="vizNova"></canvas><span class="vcap">nodes light up as a question pulls its sources</span></div>
   </div>
 </div></section>
 
