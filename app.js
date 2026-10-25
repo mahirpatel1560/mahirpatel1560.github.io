@@ -23,10 +23,10 @@
 
   /* ================= MONOLITH ================= */
   var FACES = [
-    { idx: '01 / LIVE PRODUCT', title: 'RINGLATCH', sub: 'AI phone receptionist for local businesses — built solo, in production, answering real calls.', meta: '2026 —\nCO-FOUNDER' },
-    { idx: '02 / RESEARCH — URSA', title: 'MAGNET', sub: 'Serving multi-agent LLM workflows as dataflow — just-in-time prefill, traces, a scheduling simulator.', meta: 'AUG 2025 – JAN 2026\nLLM SERVING' },
-    { idx: '03 / 100+ USERS', title: 'NOVA', sub: 'A multi-agent study companion with memory, planning, and tools — live at novabrain.dev.', meta: '2026 —\nFOUNDER' },
-    { idx: '04 / HARDWARE', title: 'COPPER', sub: 'Custom PCB through 3 revisions, a verified 32-bit ALU, and the Iron Man helmet’s JARVIS brain.', meta: '2025 – 2026\nKICAD · RTL' }
+    { idx: '01 / PAID CLIENT WORK', title: 'BOARDS', sub: 'Four paying Upwork hardware clients: schematics, layouts, and a board in production at JLCPCB.', meta: 'SEP 2026 ·\nUPWORK' },
+    { idx: '02 / RESEARCH · URSA', title: 'MAGNET', sub: 'Serving multi-agent LLM workflows as dataflow: just-in-time prefill, traces, a scheduling simulator.', meta: 'AUG 2025 – JAN 2026\nLLM SERVING' },
+    { idx: '03 / 100+ USERS', title: 'NOVA', sub: 'A multi-agent study companion with memory, planning, and tools, live at novabrain.dev.', meta: '2026 ·\nFOUNDER' },
+    { idx: '04 / HARDWARE', title: 'COPPER', sub: 'A verified 32-bit ALU and the Iron Man helmet’s JARVIS brain.', meta: '2025 – 2026\nRTL · EMBEDDED' }
   ];
   var fIdx = document.getElementById('fIdx'), fTitle = document.getElementById('fTitle'),
       fSub = document.getElementById('fSub'), fMeta = document.getElementById('fMeta'),
@@ -182,7 +182,7 @@
       t += 0.016;
       var x = s.x, w = s.w, h = s.h;
       x.clearRect(0, 0, w, h);
-      var turn = Math.floor(t / 2.2) % 2;           /* 0 agent, 1 caller */
+      var turn = Math.floor(t / 2.2) % 2;           /* 0 channel A, 1 channel B */
       var tt = (t % 2.2) / 2.2;
       var lanes = [
         { y: h * 0.32, col: '#FFFFFF', label: 1, active: turn === 0 },
@@ -200,7 +200,7 @@
         }
         x.font = '500 10px "Geist Mono", monospace';
         x.fillStyle = L.active ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.3)';
-        x.fillText(li === 0 ? 'AGENT — RILEY' : 'CALLER', 40, L.y - h * 0.16);
+        x.fillText(li === 0 ? 'CH 1 · SPEED A' : 'CH 2 · SPEED B', 40, L.y - h * 0.16);
         if (L.active) { x.fillStyle = '#4EF0B0'; x.beginPath(); x.arc(30, L.y, 3, 0, 7); x.fill(); }
       });
       /* playhead */
@@ -433,7 +433,7 @@
   function openTerm() {
     term.classList.add('open');
     if (!tout.innerHTML) {
-      tprint('<span class="c-b">mahir.patel</span> — you found the terminal.');
+      tprint('<span class="c-b">mahir.patel</span>: you found the terminal.');
       tprint('type <span class="c-g">help</span> to see commands.\n');
     }
     tin.focus();
@@ -451,7 +451,7 @@
       tprint('  <span class="c-g">whoami</span>      who is this guy');
       tprint('  <span class="c-g">projects</span>    the work');
       tprint('  <span class="c-g">research</span>    URSA / Magnet');
-      tprint('  <span class="c-g">ringlatch</span>   call my product');
+      tprint('  <span class="c-g">hardware</span>    paid client boards');
       tprint('  <span class="c-g">nova</span>        the study companion');
       tprint('  <span class="c-g">skills</span>      the toolbox');
       tprint('  <span class="c-g">resume</span>      open the PDF');
@@ -460,30 +460,32 @@
       tprint('  <span class="c-g">clear</span> · <span class="c-g">exit</span>');
     },
     whoami: function () {
-      tprint('Mahir Patel — ECE @ Illinois \'29, CS + Math minors, GPA 3.70.');
-      tprint('Co-founder @ <span class="c-b">Ringlatch</span>. Builder of NOVA (100+ users).');
-      tprint('LLM-serving researcher. FCC-licensed. Ships weekly.');
+      tprint('Mahir Patel, ECE @ Illinois \'29, CS + Math minors, GPA 3.70.');
+      tprint('Freelance PCB + embedded designer (4 Upwork clients). Builder of NOVA (100+ users).');
+      tprint('Former LLM-serving researcher. FCC-licensed. Ships weekly.');
     },
     projects: function () {
-      tprint('<span class="c-b">ringlatch</span>   live AI phone receptionist — whole stack, solo');
-      tprint('<span class="c-b">nova</span>        study companion, 100+ users — novabrain.dev');
+      tprint('<span class="c-b">boards</span>      4 paid Upwork hardware clients, 1 board in production');
+      tprint('<span class="c-b">nova</span>        study companion, 100+ users, novabrain.dev');
       tprint('<span class="c-b">magnet</span>      LLM-serving research (URSA)');
-      tprint('<span class="c-b">copper</span>      PCB ×3 revs · 32-bit ALU · JARVIS helmet');
+      tprint('<span class="c-b">copper</span>      32-bit ALU · JARVIS helmet');
       tprint('<span class="c-b">qwen3-vl</span>    fine-tuned driving grader @ 24-60 fps');
       tprint('<span class="c-b">gesturelab</span>  10-sensor desk assistant, built in 24h');
     },
     research: function () {
       tprint('<span class="c-b">Magnet</span> (URSA, Aug 2025 – Jan 2026): serving multi-agent LLM');
-      tprint('workflows as dataflow — just-in-time + parallel prefill.');
+      tprint('workflows as dataflow: just-in-time + parallel prefill.');
       tprint('My part: workload instrumentation, execution traces, and a');
       tprint('trace-driven simulator for JIT prefill scheduling.');
     },
-    ringlatch: function () {
-      tprint('dial <span class="c-b">(708) 719-6505</span> — my AI answers. seriously, call it.');
-      tprint('site: <a href="https://www.ringlatch.workers.dev" target="_blank" rel="noopener">www.ringlatch.workers.dev</a>');
+    hardware: function () {
+      tprint('4 paid Upwork hardware clients since Sep 2026:');
+      tprint('  reed-switch power board (both milestones approved)');
+      tprint('  4-layer two-speed PWM controller (5 boards in production at JLCPCB)');
+      tprint('  USB-C slip-ring protection design · fuel-pump primer circuit');
     },
     nova: function () {
-      tprint('NOVA — the AI study companion that knows you.');
+      tprint('NOVA: the AI study companion that knows you.');
       tprint('live at <a href="https://novabrain.dev" target="_blank" rel="noopener">novabrain.dev</a> · 100+ students');
     },
     skills: function () {
@@ -496,7 +498,7 @@
       tprint('github   <a href="https://github.com/mahirpatel1560" target="_blank" rel="noopener">mahirpatel1560</a>');
       tprint('linkedin <a href="https://linkedin.com/in/mahirpatel1" target="_blank" rel="noopener">mahirpatel1</a>');
     },
-    ls: function () { tprint('ringlatch/  magnet/  nova/  copper/  archive/'); },
+    ls: function () { tprint('boards/  magnet/  nova/  copper/  archive/'); },
     clear: function () { tout.innerHTML = ''; },
     exit: closeTerm
   };
@@ -512,7 +514,7 @@
       return;
     }
     if (CMDS[cmd]) CMDS[cmd]();
-    else tprint('<span class="c-d">command not found: ' + cmd.replace(/</g, '&lt;') + ' — try</span> <span class="c-g">help</span>');
+    else tprint('<span class="c-d">command not found: ' + cmd.replace(/</g, '&lt;') + ', try</span> <span class="c-g">help</span>');
   }
   tin.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') { run(tin.value); tin.value = ''; }
