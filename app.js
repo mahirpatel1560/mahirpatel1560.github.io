@@ -23,10 +23,10 @@
 
   /* ================= MONOLITH ================= */
   var FACES = [
-    { idx: '01 / PAID CLIENT WORK', title: 'BOARDS', sub: 'Four paying Upwork hardware clients: schematics, layouts and JLCPCB-ready builds.', meta: 'SEP 2026 ·\nUPWORK' },
+    { idx: '01 / PAID CLIENT WORK', title: 'BOARDS', sub: 'Four paying Upwork hardware clients: schematics, layouts, and a board in production at JLCPCB.', meta: 'SEP 2026 ·\nUPWORK' },
     { idx: '02 / RESEARCH · URSA', title: 'MAGNET', sub: 'Serving multi-agent LLM workflows as dataflow: just-in-time prefill, traces, a scheduling simulator.', meta: 'AUG 2025 – JAN 2026\nLLM SERVING' },
-    { idx: '03 / 100+ USERS', title: 'NOVA', sub: 'A retrieval-augmented assistant for UIUC course and campus questions, live at novabrain.dev.', meta: '2026 ·\nFOUNDER' },
-    { idx: '04 / HARDWARE', title: 'COPPER', sub: 'A verified 32-bit ALU and the Iron Man helmet’s JARVIS brain.', meta: '2025 – 2026\nKICAD · RTL' }
+    { idx: '03 / 100+ USERS', title: 'NOVA', sub: 'A multi-agent study companion with memory, planning, and tools, live at novabrain.dev.', meta: '2026 ·\nFOUNDER' },
+    { idx: '04 / HARDWARE', title: 'COPPER', sub: 'A verified 32-bit ALU and the Iron Man helmet’s JARVIS brain.', meta: '2025 – 2026\nRTL · EMBEDDED' }
   ];
   var fIdx = document.getElementById('fIdx'), fTitle = document.getElementById('fTitle'),
       fSub = document.getElementById('fSub'), fMeta = document.getElementById('fMeta'),
@@ -462,11 +462,11 @@
     whoami: function () {
       tprint('Mahir Patel, ECE @ Illinois \'29, CS + Math minors, GPA 3.70.');
       tprint('Freelance PCB + embedded designer (4 Upwork clients). Builder of NOVA (100+ users).');
-      tprint('LLM-serving researcher. FCC-licensed. Ships weekly.');
+      tprint('Former LLM-serving researcher. FCC-licensed. Ships weekly.');
     },
     projects: function () {
-      tprint('<span class="c-b">boards</span>      4 paid Upwork hardware builds, JLCPCB-ready');
-      tprint('<span class="c-b">nova</span>        campus Q&A assistant, 100+ users, novabrain.dev');
+      tprint('<span class="c-b">boards</span>      4 paid Upwork hardware clients, 1 board in production');
+      tprint('<span class="c-b">nova</span>        study companion, 100+ users, novabrain.dev');
       tprint('<span class="c-b">magnet</span>      LLM-serving research (URSA)');
       tprint('<span class="c-b">copper</span>      32-bit ALU · JARVIS helmet');
       tprint('<span class="c-b">qwen3-vl</span>    fine-tuned driving grader @ 24-60 fps');
@@ -485,7 +485,7 @@
       tprint('  USB-C slip-ring protection design · fuel-pump primer circuit');
     },
     nova: function () {
-      tprint('NOVA: answers UIUC course and campus questions on Discord.');
+      tprint('NOVA: the AI study companion that knows you.');
       tprint('live at <a href="https://novabrain.dev" target="_blank" rel="noopener">novabrain.dev</a> · 100+ students');
     },
     skills: function () {

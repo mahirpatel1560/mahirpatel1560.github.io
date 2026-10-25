@@ -5,7 +5,7 @@
 <script>document.documentElement.className+=" js";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mahir Patel</title>
-<meta name="description" content="Mahir Patel, UIUC electrical engineering student. Circuit boards clients pay for, and the AI software that runs on top. Open to Summer 2027 internships.">
+<meta name="description" content="Mahir Patel, UIUC electrical engineering student. AI agents and the hardware they run on: freelance PCB designer for 4 paying clients, builder of NOVA. Open to Summer 2027 internships.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -232,8 +232,8 @@
 <section id="about" class="pad"><div class="gut">
   <div class="intro rv">
     <div>
-      <p class="lede">I design circuit boards clients pay for, and I build the AI software that runs on top.</p>
-      <p><b>Mahir Patel</b>, electrical engineering at the University of Illinois Urbana-Champaign ('29, CS + Math minors). Freelance <b>PCB and embedded designer</b> on Upwork, builder of <b>NOVA</b>, former undergraduate researcher on <b>LLM serving systems</b>. It started with programming JARVIS into ASME's Iron Man helmet as a freshman.</p>
+      <p class="lede">I design circuit boards clients pay for. I also build AI: JARVIS for an Iron Man helmet, NOVA for 100+ students.</p>
+      <p><b>Mahir Patel</b>, electrical engineering at the University of Illinois Urbana-Champaign ('29, CS + Math minors). Freelance <b>PCB and embedded designer</b> on Upwork, builder of <b>NOVA</b>, former undergraduate researcher on <b>LLM serving systems</b>. It started with programming JARVIS into ASME's Iron Man helmet as a freshman; it hasn't slowed down since.</p>
       <div class="cta">
         <a class="btn primary" href="Mahir_Patel_Resume.pdf">VIEW RESUME</a>
         <a class="btn" href="https://github.com/mahirpatel1560">GITHUB</a>
@@ -247,7 +247,7 @@
     <div class="stat"><div class="n"><span data-count="100">100</span>+</div><div class="l">STUDENTS ON NOVA</div></div>
     <div class="stat"><div class="n"><span data-count="60">60</span> FPS</div><div class="l">FINE-TUNED QWEN3-VL (24–60)</div></div>
     <div class="stat"><div class="n"><span data-count="4">4</span></div><div class="l">PAID UPWORK HARDWARE CONTRACTS</div></div>
-    <div class="stat"><div class="n"><span data-count="6">6</span></div><div class="l">ENGINEERS I LED ON THE IRON MAN HELMET</div></div>
+    <div class="stat"><div class="n"><span data-count="70">70</span>+</div><div class="l">PRINTED PARTS, IRON MAN HELMET</div></div>
   </div>
 </div></section>
 
@@ -257,7 +257,7 @@
   <h3 class="rv">Boards<span class="flag">4 CLIENTS</span></h3>
   <div class="ch-grid rv">
     <div class="ch-copy">
-      <p>Since September 2026 I have designed hardware for four paying clients on Upwork, from first schematic to files a factory can build.</p>
+      <p>Since September 2026 I have designed hardware for four paying clients on Upwork.</p>
       <p><b>Reed-switch power board:</b> a drop-in replacement for a part that kept failing in a client's model locomotives. Schematic, parts list, cost at 50 units and a JLCPCB-ready layout; both milestones approved.</p>
       <p><b>Two-speed PWM motor controller:</b> a 4-layer, 88-part board with JLCPCB assembly files. The first 5 boards went into production at JLCPCB in October 2026.</p>
       <p><b>Also:</b> USB-C protection for a rotating slip ring (schematic and part selection) and an electric fuel-pump primer circuit.</p>
@@ -288,24 +288,25 @@
   <h3 class="rv">Nova</h3>
   <div class="ch-grid rv">
     <div class="ch-copy">
-      <p>A <b>retrieval-augmented assistant</b> that answers UIUC course and campus questions. Live on Discord, used by 100+ UIUC students, and improved from their feedback.</p>
-      <div class="chips"><span class="chip">RETRIEVAL</span><span class="chip">LLM APIS</span><span class="chip">PYTHON</span><span class="chip">DISCORD</span></div>
+      <p>A multi-agent study companion with <b>persistent memory, planning, and tool execution</b>, not a single chatbot call. Live on Discord, used by 100+ students, shipped weekly against real feedback.</p>
+      <p>NOVA grew out of the JARVIS system I programmed for the Iron Man helmet: the same thesis, scaled from one servo faceplate to a campus.</p>
+      <div class="chips"><span class="chip">MULTI-AGENT</span><span class="chip">RETRIEVAL</span><span class="chip">MEMORY</span><span class="chip">DISCORD</span></div>
       <div class="num-line"><a href="https://novabrain.dev">NOVABRAIN.DEV</a></div>
       <div class="sub-mono">try it yourself: onboarding takes a minute</div>
     </div>
-    <div class="viz"><span class="vlabel">QUESTION · RETRIEVAL · SOURCES · ANSWER</span><canvas id="vizNova"></canvas><span class="vcap">nodes light up as a question pulls its sources</span></div>
+    <div class="viz"><span class="vlabel">AGENT NETWORK · PLANNING · MEMORY · TOOLS</span><canvas id="vizNova"></canvas><span class="vcap">nodes fire as agents think</span></div>
   </div>
 </div></section>
 
 <!-- ============ CH 04 COPPER ============ -->
 <section class="ch pad" id="ch-copper"><div class="gut">
-  <div class="ch-head rv"><span class="ch-no"><b>04</b> / 04 · HARDWARE</span><span class="ch-no">2025 – 2026 · KICAD · RTL</span></div>
+  <div class="ch-head rv"><span class="ch-no"><b>04</b> / 04 · HARDWARE</span><span class="ch-no">2025 – 2026 · RTL · EMBEDDED</span></div>
   <h3 class="rv">Copper</h3>
   <div class="ch-grid flip rv">
     <div class="ch-copy">
             <p><b>32-bit ALU in SystemVerilog:</b> verified in Vivado with a self-checking testbench, directed and randomized vectors across every operation and flag.</p>
       <p><b>The Iron Man helmet:</b> led the electrical subsystem across a 6-person ASME team and programmed its JARVIS voice AI on a Raspberry Pi 5.</p>
-      <div class="chips"><span class="chip">KICAD</span><span class="chip">I2C/SPI</span><span class="chip">SYSTEMVERILOG</span><span class="chip">VIVADO</span><span class="chip">RASPBERRY PI</span></div>
+      <div class="chips"><span class="chip">SYSTEMVERILOG</span><span class="chip">VIVADO</span><span class="chip">RASPBERRY PI</span><span class="chip">PYTHON</span></div>
     </div>
     <div class="viz"><span class="vlabel">PCB · PROCEDURAL, NO MODEL FILES</span><canvas id="vizBoard"></canvas><span class="vcap">drag to rotate</span></div>
   </div>
